@@ -21,6 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+// 使用 AV.Cloud.CookieSession 中间件时，需要删除这段代码
 // 未处理异常捕获 middleware
 app.use(function(req, res, next) {
   var d = domain.create();
