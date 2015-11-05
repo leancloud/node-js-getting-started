@@ -47,6 +47,28 @@ avoscloud deploy
 avoscloud publish
 ```
 
+## 注意事项
+
+使用`AV.Cloud.CookieSession`中间件时，需要删除`app.js`中以下代码
+
+```
+// 未处理异常捕获 middleware
+app.use(function(req, res, next) {
+  var d = domain.create();
+  d.add(req);
+  d.add(res);
+  d.on('error', function(err) {
+    console.error('uncaughtException url=%s, msg=%s', req.url, err.stack || err.message || err);
+    if(!res.finished) {
+      res.statusCode = 500;
+      res.setHeader('content-type', 'application/json; charset=UTF-8');
+      res.end('uncaughtException');
+    }
+  });
+  d.run(next);
+});
+```
+
 ## 相关文档
 
 * [LeanEngine 指南](https://leancloud.cn/docs/cloud_code_guide.html)
