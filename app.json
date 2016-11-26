@@ -1,0 +1,29 @@
+{
+  "name": "node-js-getting-started",
+  "scripts": {
+  },
+  "env": {
+    "LEANCLOUD_APP_ID": {
+      "required": true
+    },
+    "LEANCLOUD_APP_KEY": {
+      "required": true
+    },
+    "LEANCLOUD_APP_MASTER_KEY": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
