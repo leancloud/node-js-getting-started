@@ -1,8 +1,5 @@
 # Node.js Getting started
-在 LeanCloud 云引擎上使用 Express 的 Node.js 实例项目。
-
-## 一键部署
-[![Deploy to LeanEngine](http://ac-32vx10b9.clouddn.com/109bd02ee9f5875a.png)](https://leancloud.cn/1.1/engine/deploy-button)
+在 LeanCloud 云引擎上使用 Express 的 Node.js 示例项目。
 
 ## 本地运行
 
@@ -37,6 +34,7 @@ lean up
 ## 部署到 LeanEngine
 
 部署到预备环境（若无预备环境则直接部署到生产环境）：
+
 ```
 lean deploy
 ```
