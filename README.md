@@ -1,13 +1,15 @@
 # Node.js Getting started
 在 LeanCloud 云引擎上使用 Express 的 Node.js 示例项目。
 
+若希望获取更多常见功能和代码片段，请访问 [leancloud/leanengine-nodejs-demos](https://github.com/leancloud/leanengine-nodejs-demos)。
+
 ## 本地运行
 
 首先确认本机已经安装 [Node.js](http://nodejs.org/) 运行环境和 [LeanCloud 命令行工具](https://leancloud.cn/docs/leanengine_cli.html)，然后执行下列指令：
 
 ```
-$ git clone https://github.com/leancloud/node-js-getting-started.git
-$ cd node-js-getting-started
+git clone https://github.com/leancloud/node-js-getting-started.git
+cd node-js-getting-started
 ```
 
 安装依赖：
