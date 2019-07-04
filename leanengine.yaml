@@ -1,0 +1,4 @@
+exposeEnvironmentsOnBuild: true
+afterBuild:
+  - npm list --depth 0
+  - npm audit
