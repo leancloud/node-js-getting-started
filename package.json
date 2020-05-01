@@ -6,7 +6,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js -- "
+    "dev": "nodemon server.js -- ",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -15,12 +17,14 @@
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "leancloud-storage": "^3.11.0",
-    "leanengine": "^3.3.2"
+    "leanengine": "^3.3.2",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.7"
   },
   "engines": {
     "node": "12.x"
-  }
+  },
+  "snyk": true
 }
