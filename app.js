@@ -7,23 +7,24 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var AV = require('leanengine');
 
-// 加载云函数定义，你可以将云函数拆分到多个文件方便管理，但需要在主文件中加载它们
+// Loads cloud function defintions.
+// You can split it into multiple files but do not forget to load them in the main file.
 require('./cloud');
 
 var app = express();
 
-// 设置模板引擎
+// Configures template engine.
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// 设置默认超时时间
+// Confirues default timeout.
 app.use(timeout('15s'));
 
-// 加载云引擎中间件
+// Loads LeanEngine middleware.
 app.use(AV.express());
 
 app.enable('trust proxy');
-// 需要重定向到 HTTPS 可去除下一行的注释。
+// Uncomment the following line to redirect all HTTP requests to HTTPS.
 // app.use(AV.Cloud.HttpsRedirect());
 
 app.use(express.static('public'));
@@ -36,11 +37,11 @@ app.get('/', function(req, res) {
   res.render('index', { currentTime: new Date() });
 });
 
-// 可以将一类的路由单独保存在一个文件中
+// You can store routings in multiple files according to their categories.
 app.use('/todos', require('./routes/todos'));
 
 app.use(function(req, res, next) {
-  // 如果任何一个路由都没有返回响应，则抛出一个 404 异常给后续的异常处理器
+  // If there is no routing answering, throw a 404 exception to exception handlers.
   if (!res.headersSent) {
     var err = new Error('Not Found');
     err.status = 404;
@@ -51,7 +52,7 @@ app.use(function(req, res, next) {
 // error handlers
 app.use(function(err, req, res, next) {
   if (req.timedout && req.headers.upgrade === 'websocket') {
-    // 忽略 websocket 的超时
+    // Ignores websocket timeout.
     return;
   }
 
@@ -60,13 +61,13 @@ app.use(function(err, req, res, next) {
     console.error(err.stack || err);
   }
   if (req.timedout) {
-    console.error('请求超时: url=%s, timeout=%d, 请确认方法执行耗时很长，或没有正确的 response 回调。', req.originalUrl, err.timeout);
+    console.error('Request timeout: url=%s, timeout=%d, please check whether its execute time is too long, or the response callback is not proper.', req.originalUrl, err.timeout);
   }
   res.status(statusCode);
-  // 默认不输出异常详情
+  // Do not output exception details by default.
   var error = {};
   if (app.get('env') === 'development') {
-    // 如果是开发环境，则将异常堆栈输出到页面，方便开发调试
+    // Displays exception stack on page if in the development enviroment.
     error = err;
   }
   res.render('error', {

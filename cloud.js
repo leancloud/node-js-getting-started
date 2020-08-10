@@ -3,14 +3,14 @@ const fs = require('fs')
 const path = require('path')
 
 /**
- * 加载 functions 目录下所有的云函数
+ * Loads all cloud functions under the `functions` directory.
  */
 fs.readdirSync(path.join(__dirname, 'functions')).forEach( file => {
   require(path.join(__dirname, 'functions', file))
 })
 
 /**
- * 一个简单的云代码方法
+ * A simple cloud function.
  */
 AV.Cloud.define('hello', function(request) {
   return 'Hello world!'
