@@ -7,7 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var AV = require('leanengine');
 
-// Loads cloud function defintions.
+// Loads cloud function definitions.
 // You can split it into multiple files but do not forget to load them in the main file.
 require('./cloud');
 
@@ -17,7 +17,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// Confirues default timeout.
+// Configures default timeout.
 app.use(timeout('15s'));
 
 // Loads LeanEngine middleware.
@@ -61,13 +61,13 @@ app.use(function(err, req, res, next) {
     console.error(err.stack || err);
   }
   if (req.timedout) {
-    console.error('Request timeout: url=%s, timeout=%d, please check whether its execute time is too long, or the response callback is not proper.', req.originalUrl, err.timeout);
+    console.error('Request timeout: url=%s, timeout=%d, please check whether its execution time is too long, or the response callback is invalid.', req.originalUrl, err.timeout);
   }
   res.status(statusCode);
   // Do not output exception details by default.
   var error = {};
   if (app.get('env') === 'development') {
-    // Displays exception stack on page if in the development enviroment.
+    // Displays exception stack on page if running in the development enviroment.
     error = err;
   }
   res.render('error', {
