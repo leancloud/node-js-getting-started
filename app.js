@@ -34,6 +34,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.get('/', function(req, res) {
+  res.header('Cache-Control', 'no-cache');
   res.render('index', { currentTime: new Date() });
 });
 
