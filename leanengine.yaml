@@ -1,4 +1,4 @@
 exposeEnvironmentsOnBuild: true
-afterBuild:
+build:
   - npm list --depth 0
   - env
