@@ -4,6 +4,7 @@
   "private": true,
   "description": "A sample Node.js app using Express",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js -- "

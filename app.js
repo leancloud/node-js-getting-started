@@ -1,20 +1,21 @@
 'use strict'
 
-const express = require('express')
-const timeout = require('connect-timeout')
-const path = require('path')
-const cookieParser = require('cookie-parser')
-const bodyParser = require('body-parser')
-const AV = require('leanengine')
+import express from 'express'
+import timeout from 'connect-timeout'
+import path from 'path'
+import cookieParser from 'cookie-parser'
+import bodyParser from 'body-parser'
+import AV from 'leanengine'
+import {fileURLToPath} from 'url'
 
 // Loads cloud function definitions.
 // You can split them into several files, but don't forget to load them into the main file.
-require('./cloud')
+import './cloud.js'
 
 const app = express()
 
 // Configures template engine.
-app.set('views', path.join(__dirname, 'views'))
+app.set('views', path.join(path.dirname(fileURLToPath(import.meta.url)), 'views'))
 app.set('view engine', 'ejs')
 
 // Configures default timeout.
@@ -39,7 +40,8 @@ app.get('/', (req, res) => {
 })
 
 // You can put routings in multiple files according to their categories.
-app.use('/todos', require('./routes/todos'))
+import todosRouter from './routes/todos.js'
+app.use('/todos', todosRouter)
 
 app.use((req, res, next) => {
   // If there is no routing answering, throw a 404 exception to exception handlers.
@@ -77,4 +79,4 @@ app.use((err, req, res, next) => {
   })
 })
 
-module.exports = app
+export default app

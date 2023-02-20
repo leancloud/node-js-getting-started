@@ -1,6 +1,6 @@
 'use strict'
 
-const AV = require('leanengine')
+import AV from 'leanengine'
 
 AV.init({
   appId: process.env.LEANCLOUD_APP_ID,
@@ -11,7 +11,7 @@ AV.init({
 // Comment the following line if you do not want to use masterKey.
 AV.Cloud.useMasterKey()
 
-const app = require('./app')
+import app from './app.js'
 
 // Retrieves the port number from environment variable `LEANCLOUD_APP_PORT`.
 // LeanEngine runtime will assign a port and set the environment variable automatically.

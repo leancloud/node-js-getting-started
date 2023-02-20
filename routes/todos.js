@@ -1,9 +1,11 @@
 'use strict'
 
-const router = require('express').Router()
-const AV = require('leanengine')
+import {Router} from 'express'
+import AV from 'leanengine'
 
 const Todo = AV.Object.extend('Todo')
+
+const router = Router()
 
 // Todo list
 router.get('/', async (req, res, next) => {
@@ -46,4 +48,4 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-module.exports = router
+export default router
