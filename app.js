@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var AV = require('leanengine');
 
 // Loads cloud function definitions.
-// You can split it into multiple files but do not forget to load them in the main file.
+// You can split them into several files, but don't forget to load them into the main file.
 require('./cloud');
 
 var app = express();
@@ -38,7 +38,7 @@ app.get('/', function(req, res) {
   res.render('index', { currentTime: new Date() });
 });
 
-// You can store routings in multiple files according to their categories.
+// You can put routings in multiple files according to their categories.
 app.use('/todos', require('./routes/todos'));
 
 app.use(function(req, res, next) {

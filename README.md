@@ -6,8 +6,12 @@ A simple Node.js application based on [express] for LeanEngine Node.js runtime.
 
 ## Documentation
 
-* [Node.js Web Hosting Guide](https://docs.leancloud.app/leanengine_webhosting_guide-node.html)
-* [Node.js Cloud Function Guide](https://docs.leancloud.app/leanengine_cloudfunction_guide-node.html)
-* [LeanStorage JavaScript Guide](https://docs.leancloud.app/leanstorage_guide-js.html)
-* [JavaScript SDK API](https://leancloud.github.io/javascript-sdk/docs/)
-* [lean-cli Guide](https://docs.leancloud.app/leanengine_cli.html)
+- [快速开始部署云引擎应用](https://docs.leancloud.cn/sdk/engine/deploy/getting-started/) | [Getting Started With Cloud Engine](https://docs.leancloud.cn/en/sdk/engine/deploy/getting-started/)
+- [云函数和 Hook 开发指南](https://docs.leancloud.cn/sdk/engine/functions/guides/) | [Cloud Functions and Hooks Guide](https://docs.leancloud.cn/en/sdk/engine/functions/guides/)
+- [云引擎 Node.js 运行环境](https://docs.leancloud.cn/sdk/engine/deploy/nodejs/) | [Node.js Runtime Environment](https://docs.leancloud.cn/en/sdk/engine/deploy/nodejs/)
+- [数据存储开发指南 · JavaScript](https://docs.leancloud.cn/sdk/storage/guide/js/)
+- [命令行工具 CLI 使用指南](https://docs.leancloud.cn/sdk/engine/cli/) | [CLI Guide](https://docs.leancloud.cn/en/sdk/engine/cli/)
+
+## Contribute
+
+- Don't commit `package-lock.json`, because of this is a template project, we hope users can lock their dependencies when they init projects for the first time.
