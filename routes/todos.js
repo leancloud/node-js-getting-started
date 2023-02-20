@@ -1,39 +1,49 @@
-'use strict';
-var router = require('express').Router();
-var AV = require('leanengine');
+'use strict'
 
-var Todo = AV.Object.extend('Todo');
+const router = require('express').Router()
+const AV = require('leanengine')
+
+const Todo = AV.Object.extend('Todo')
 
 // Todo list
-router.get('/', function(req, res, next) {
-  var query = new AV.Query(Todo);
-  query.descending('createdAt');
-  query.find().then(function(results) {
+router.get('/', async (req, res, next) => {
+  try {
+    const query = new AV.Query(Todo)
+    query.descending('createdAt')
+
+    const results = await query.find()
+
     res.render('todos', {
       title: 'TODO 列表',
       todos: results
-    });
-  }, function(err) {
+    })
+  } catch (err) {
     if (err.code === 101) {
       // Todo class does not exist in the cloud yet.
       res.render('todos', {
         title: 'TODO 列表',
         todos: []
-      });
+      })
     } else {
-      next(err);
+      next(err)
     }
-  }).catch(next);
-});
+  }
+})
 
 // Creates a new todo item.
-router.post('/', function(req, res, next) {
-  var content = req.body.content;
-  var todo = new Todo();
-  todo.set('content', content);
-  todo.save().then(function(todo) {
-    res.redirect('/todos');
-  }).catch(next);
-});
+router.post('/', async (req, res, next) => {
+  try {
+    const content = req.body.content
+    const todo = new Todo()
 
-module.exports = router;
+    todo.set('content', content)
+
+    await todo.save()
+
+    res.redirect('/todos')
+  } catch (err) {
+    next(err)
+  }
+})
+
+module.exports = router

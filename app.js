@@ -1,80 +1,80 @@
-'use strict';
+'use strict'
 
-var express = require('express');
-var timeout = require('connect-timeout');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var AV = require('leanengine');
+const express = require('express')
+const timeout = require('connect-timeout')
+const path = require('path')
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
+const AV = require('leanengine')
 
 // Loads cloud function definitions.
 // You can split them into several files, but don't forget to load them into the main file.
-require('./cloud');
+require('./cloud')
 
-var app = express();
+const app = express()
 
 // Configures template engine.
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs')
 
 // Configures default timeout.
-app.use(timeout('15s'));
+app.use(timeout('15s'))
 
 // Loads LeanEngine middleware.
-app.use(AV.express());
+app.use(AV.express())
 
-app.enable('trust proxy');
+app.enable('trust proxy')
 // Uncomment the following line to redirect all HTTP requests to HTTPS.
-// app.use(AV.Cloud.HttpsRedirect());
+// app.use(AV.Cloud.HttpsRedirect())
 
-app.use(express.static('public'));
+app.use(express.static('public'))
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cookieParser())
 
-app.get('/', function(req, res) {
-  res.header('Cache-Control', 'no-cache');
-  res.render('index', { currentTime: new Date() });
-});
+app.get('/', (req, res) => {
+  res.header('Cache-Control', 'no-cache')
+  res.render('index', { currentTime: new Date() })
+})
 
 // You can put routings in multiple files according to their categories.
-app.use('/todos', require('./routes/todos'));
+app.use('/todos', require('./routes/todos'))
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   // If there is no routing answering, throw a 404 exception to exception handlers.
   if (!res.headersSent) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+    const err = new Error('Not Found')
+    err.status = 404
+    next(err)
   }
-});
+})
 
-// error handlers
-app.use(function(err, req, res, next) {
+// error handler
+app.use((err, req, res, next) => {
   if (req.timedout && req.headers.upgrade === 'websocket') {
     // Ignores websocket timeout.
-    return;
+    return
   }
 
-  var statusCode = err.status || 500;
+  const statusCode = err.status || 500
   if (statusCode === 500) {
-    console.error(err.stack || err);
+    console.error(err.stack || err)
   }
   if (req.timedout) {
-    console.error('Request timeout: url=%s, timeout=%d, please check whether its execution time is too long, or the response callback is invalid.', req.originalUrl, err.timeout);
+    console.error('Request timeout: url=%s, timeout=%d, please check whether its execution time is too long, or the response callback is invalid.', req.originalUrl, err.timeout)
   }
-  res.status(statusCode);
+  res.status(statusCode)
   // Do not output exception details by default.
-  var error = {};
+  let error = {}
   if (app.get('env') === 'development') {
     // Displays exception stack on page if running in the development enviroment.
-    error = err;
+    error = err
   }
   res.render('error', {
     message: err.message,
     error: error
-  });
-});
+  })
+})
 
-module.exports = app;
+module.exports = app
