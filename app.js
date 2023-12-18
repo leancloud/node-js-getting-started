@@ -25,7 +25,7 @@ app.use(AV.express())
 
 app.enable('trust proxy')
 // Uncomment the following line to redirect all HTTP requests to HTTPS.
-// app.use(AV.Cloud.HttpsRedirect())
+app.use(AV.Cloud.HttpsRedirect())
 
 app.use(express.static('public'))
 
